@@ -16,9 +16,9 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'admin'], function() {
-    Route::get('news/create', 'Admin\NewsController@add');
-    Route::get('profile/create', 'Admin\ProfileController@add');
-    Route::get('profile/edit', 'Admin\ProfileController@edit');
+    Route::get('news/create', 'Admin\NewsController@add')->middleware('auth');
+    Route::get('profile/create', 'Admin\ProfileController@add')->middleware('auth');
+    Route::get('profile/edit', 'Admin\ProfileController@edit')->middleware('auth');
 });
 
 //課題１URLとControllerやActionを紐付ける機能を何といいますか？→Routing
@@ -31,3 +31,11 @@ Route::group(['prefix' => 'admin'], function() {
 
 //課題４【応用】 前章でAdmin/ProfileControllerを作成し、add Action, edit Actionを追加しました。web.phpを編集して、admin/profile/create にアクセスしたら ProfileController の add Action に、admin/profile/edit にアクセスしたら ProfileController の edit Action に割り当てるように設定してください。
 //上記に追加
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
